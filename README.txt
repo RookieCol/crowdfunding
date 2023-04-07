@@ -1,28 +1,63 @@
-REMIX DEFAULT WORKSPACE
+# CrowdFunding Contract
 
-Remix default workspace is present when:
-i. Remix loads for the very first time 
-ii. A new workspace is created with 'Default' template
-iii. There are no files existing in the File Explorer
+This is a smart contract for crowdfunding in Ethereum blockchain.
 
-This workspace contains 3 directories:
+## Requirements
 
-1. 'contracts': Holds three contracts with increasing levels of complexity.
-2. 'scripts': Contains four typescript files to deploy a contract. It is explained below.
-3. 'tests': Contains one Solidity test file for 'Ballot' contract & one JS test file for 'Storage' contract.
+* Node.js
+* Hardhat
+* Solidity
 
-SCRIPTS
+## Installation
+### Clone the repository:
+```console
+git clone https://github.com/RookieCol/crowdfunding.git
+```
 
-The 'scripts' folder has four typescript files which help to deploy the 'Storage' contract using 'web3.js' and 'ethers.js' libraries.
 
-For the deployment of any other contract, just update the contract's name from 'Storage' to the desired contract and provide constructor arguments accordingly 
-in the file `deploy_with_ethers.ts` or  `deploy_with_web3.ts`
+### Install dependencies:
+ ```console
+ cd crowdfunding
+npm install
+ ```
+## Usage
 
-In the 'tests' folder there is a script containing Mocha-Chai unit tests for 'Storage' contract.
+###Compile the contract:
+```console
+npx hardhat compile
+```
+###Deploy
+```
+npx hardhat run scripts/deploy.js --network <network>
+```
 
-To run a script, right click on file name in the file explorer and click 'Run'. Remember, Solidity file must already be compiled.
-Output from script will appear in remix terminal.
+## Contract
 
-Please note, require/import is supported in a limited manner for Remix supported modules.
-For now, modules supported by Remix are ethers, web3, swarmgw, chai, multihashes, remix and hardhat only for hardhat.ethers object/plugin.
-For unsupported modules, an error like this will be thrown: '<module_name> module require is not supported by Remix IDE' will be shown.
+The contract is located in the `contracts` directory and is called `CrowdFunding.sol`. It contains the following functions:
+
+### `createProject(string id, string name, string description, uint256 fundraisingGoal)`
+
+Creates a new project with the given `id`, `name`, `description`, and `fundraisingGoal`. The `id` must be unique and cannot be changed after the project is created. The function emits a `ProjectCreated` event with the project details.
+
+### `fundProject(uint256 projectIndex) payable`
+
+Funds the project at the given `projectIndex` with the amount of Ether sent with the transaction. The function emits a `ProjectFunded` event with the project ID and the amount funded.
+
+### `changeProjectState(FundraisingState newState, uint256 projectIndex)`
+
+Changes the state of the project at the given `projectIndex` to the new state `newState`. The function emits a `ProjectStateChanged` event with the project ID and the new state.
+
+### `getProjectCount() view returns (uint256)`
+
+Returns the total number of projects.
+
+### `getProjectById(string projectId) view returns (string, string, string, address, FundraisingState, uint256, uint256)`
+
+Returns the details of the project with the given `projectId`.
+
+## SPDX-License-Identifier
+
+The license used for this project is the GNU General Public License v3.0 (GPL-3.0). 
+
+
+

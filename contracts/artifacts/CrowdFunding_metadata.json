@@ -1,35 +1,40 @@
 {
 	"compiler": {
-		"version": "0.8.18+commit.87f61d96"
+		"version": "0.8.17+commit.8df45f5f"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
 			{
+				"anonymous": false,
 				"inputs": [
 					{
+						"indexed": false,
 						"internalType": "string",
-						"name": "_id",
+						"name": "projectId",
 						"type": "string"
 					},
 					{
+						"indexed": false,
 						"internalType": "string",
-						"name": "_name",
+						"name": "name",
 						"type": "string"
 					},
 					{
+						"indexed": false,
 						"internalType": "string",
-						"name": "_description",
+						"name": "description",
 						"type": "string"
 					},
 					{
+						"indexed": false,
 						"internalType": "uint256",
-						"name": "_fundraisingGoal",
+						"name": "fundraisingGoal",
 						"type": "uint256"
 					}
 				],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
+				"name": "ProjectCreated",
+				"type": "event"
 			},
 			{
 				"anonymous": false,
@@ -61,22 +66,56 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "string",
+						"internalType": "enum CrowdFunding.FundraisingState",
 						"name": "state",
-						"type": "string"
+						"type": "uint8"
 					}
 				],
 				"name": "ProjectStateChanged",
 				"type": "event"
 			},
 			{
-				"inputs": [],
-				"name": "author",
+				"inputs": [
+					{
+						"internalType": "enum CrowdFunding.FundraisingState",
+						"name": "newState",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "projectIndex",
+						"type": "uint256"
+					}
+				],
+				"name": "changeProjectState",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "contributions",
 				"outputs": [
 					{
-						"internalType": "address payable",
-						"name": "",
+						"internalType": "address",
+						"name": "contributor",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -86,39 +125,83 @@
 				"inputs": [
 					{
 						"internalType": "string",
-						"name": "newState",
+						"name": "id",
 						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "fundraisingGoal",
+						"type": "uint256"
 					}
 				],
-				"name": "changeProjectState",
+				"name": "createProject",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "description",
-				"outputs": [
+				"inputs": [
 					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
+						"internalType": "uint256",
+						"name": "projectIndex",
+						"type": "uint256"
 					}
 				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "fundProject",
 				"outputs": [],
 				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "fundraisingGoal",
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "projectId",
+						"type": "string"
+					}
+				],
+				"name": "getProjectById",
 				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "enum CrowdFunding.FundraisingState",
+						"name": "",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
 					{
 						"internalType": "uint256",
 						"name": "",
@@ -130,7 +213,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "funds",
+				"name": "getProjectCount",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -142,39 +225,49 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "id",
-				"outputs": [
+				"inputs": [
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "",
-						"type": "string"
+						"type": "uint256"
 					}
 				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "name",
+				"name": "projects",
 				"outputs": [
 					{
 						"internalType": "string",
-						"name": "",
+						"name": "id",
 						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "state",
-				"outputs": [
+					},
 					{
 						"internalType": "string",
-						"name": "",
+						"name": "name",
 						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "address payable",
+						"name": "author",
+						"type": "address"
+					},
+					{
+						"internalType": "enum CrowdFunding.FundraisingState",
+						"name": "state",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "funds",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "fundraisingGoal",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -194,9 +287,9 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/1_Storage.sol": "CrowdFunding"
+			"contracts/crowdFunding.sol": "CrowdFunding"
 		},
-		"evmVersion": "paris",
+		"evmVersion": "london",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -208,12 +301,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/1_Storage.sol": {
-			"keccak256": "0x64b8c51d5fbb6d6b1312acd663c142c6e34d0c5857fc42e3e5f7c564f4dfd59c",
+		"contracts/crowdFunding.sol": {
+			"keccak256": "0x1058247f025b3a4cf94fec69a15a65092eab83be3337dc1ed4621ad79821baf0",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://2d3b21e17e60d5e4b9b3781f4626a237f4e18f2fe6550d54bfa279f9feed772c",
-				"dweb:/ipfs/QmWHnCREZAdSji9DUHbP3k6UCVgG9zSZVLXb339jfZz3tq"
+				"bzz-raw://a06712d47e9b9633f5eb4a97a82860045770cf7b6c5265bc7c4501455a524ddb",
+				"dweb:/ipfs/QmVd2xjE3tSvGE31GAMonsNFtt5rdifk2cpaP9RDJGDtdQ"
 			]
 		}
 	},
