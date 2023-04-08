@@ -22,11 +22,11 @@ npm install
  ```
 ## Usage
 
-###Compile the contract:
+### Compile the contract:
 ```console
 npx hardhat compile
 ```
-###Deploy
+### Deploy
 ```
 npx hardhat run scripts/deploy.js --network <network>
 ```
